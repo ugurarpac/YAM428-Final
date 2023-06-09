@@ -30,9 +30,11 @@ services:
       - drupal
 
   certbot:
-    image: certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    depends_on:
-      - nginx
+  image: certbot/certbot
+  command: certonly --non-interactive --agree-tos --email ugurarpaci1@gmail.com --webroot --webroot-path /var/www/certbot --config-dir /etc/letsencrypt
+  volumes:
+    - ./certbot/conf:/etc/letsencrypt
+    - ./certbot/www:/var/www/certbot
+  depends_on:
+    - nginx
+
